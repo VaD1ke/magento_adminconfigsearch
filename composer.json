@@ -1,0 +1,19 @@
+{
+    "require": {
+        "oggettoweb/coding_standard": "dev-master",
+        "oggettoweb/ajax": "1.*",
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/OggettoWeb/Oggetto-Coding-Standard"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/OggettoWeb/ajax"
+        }
+    ],
+    "extra": {
+        "magento-root-dir": "."
+    }
+}

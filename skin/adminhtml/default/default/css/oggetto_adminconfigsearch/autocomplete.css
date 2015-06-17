@@ -1,0 +1,46 @@
+.autocomplete-input {
+    padding: 3px;
+    width: 200px;
+    text-align: left;
+}
+.autocomplete-scroll {
+    max-width: 200px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.autocomplete-menu-item {
+    text-align: left;
+    position: relative;
+    border: 1px solid #7f8c8d;
+}
+
+.autocomplete-menu-item-breadcrumb {
+    color: #34495e;
+    font-size: 7pt;
+    line-height: 7pt;
+}
+
+.autocomplete-menu-item-label {
+    margin: 0 38px 3px 0;
+    color: #2c3e50;
+    font-size: 11pt;
+    font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+}
+
+.autocomplete-menu-item-value {
+    color: #34495e;
+    font-size: 9pt;
+    font-family: "trebuchet ms", verdana, tahoma, sans-serif;
+    font-style: italic;
+}
+
+.config-search-form {
+    float: left;
+    margin: 1px 0 0 20px;
+}
+
+.error {
+    background-color: #c0392b;
+}

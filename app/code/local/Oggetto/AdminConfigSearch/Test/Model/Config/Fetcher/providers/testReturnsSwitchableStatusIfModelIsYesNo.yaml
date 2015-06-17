@@ -1,0 +1,6 @@
+-
+  - switchable
+  - model: adminhtml/system_config_source_yesno
+-
+  - not_switchable
+  - model: model

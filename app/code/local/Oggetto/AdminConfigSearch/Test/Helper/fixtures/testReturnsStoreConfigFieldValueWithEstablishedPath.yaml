@@ -1,0 +1,2 @@
+config:
+    default/system/smtp/disable: 0

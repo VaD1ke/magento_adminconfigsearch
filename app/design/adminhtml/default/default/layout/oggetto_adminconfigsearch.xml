@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<!--
+Oggetto Admin Config Search extension for Magento
+
+NOTICE OF LICENSE
+
+This source file is subject to the Open Software License (OSL 3.0)
+that is bundled with this package in the file LICENSE.txt.
+It is also available through the world-wide-web at this URL:
+http://opensource.org/licenses/osl-3.0.php
+
+DISCLAIMER
+
+Do not edit or add to this file if you wish to upgrade
+the Oggetto Admin Config Search module to newer versions in the future.
+If you wish to customize the Oggetto AdminConfigSearch module for your needs
+please refer to http://www.magentocommerce.com for more information.
+
+@category   Oggetto
+@package    Oggetto_AdminConfigSearch
+@copyright  Copyright (C) 2015 Oggetto Web (http://oggettoweb.com)
+@license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+-->
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/jquery/jquery-ui.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/oggetto_adminconfigsearch/autocomplete.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/oggetto_adminconfigsearch/toggle.css</name>
+            </action>
+            <action method="addJs">
+                <name>lib/jquery/jquery-2.1.4.min.js</name>
+            </action>
+            <action method="addJs">
+                <script>lib/jquery/noconflict.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/oggetto_adminconfigsearch/config-singleton.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/jquery/jquery-ui.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/oggetto_adminconfigsearch/autocomplete.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/oggetto_adminconfigsearch/form-submitting.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/oggetto_adminconfigsearch/field-toggle.js</name>
+            </action>
+        </reference>
+
+        <reference name="menu">
+            <block type="oggetto_adminconfigsearch/adminhtml_search" name="menu.search" as="config_search" template="oggetto_adminconfigsearch/search.phtml"/>
+        </reference>
+    </default>
+</layout>
