@@ -4,7 +4,7 @@
     text-align: left;
 }
 .autocomplete-scroll {
-    max-width: 200px;
+    max-width: 400px;
     max-height: 300px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -30,6 +30,9 @@
 }
 
 .autocomplete-menu-item-value {
+    margin: 0 5px 0 150px;
+    float: right;
+
     color: #34495e;
     font-size: 9pt;
     font-family: "trebuchet ms", verdana, tahoma, sans-serif;

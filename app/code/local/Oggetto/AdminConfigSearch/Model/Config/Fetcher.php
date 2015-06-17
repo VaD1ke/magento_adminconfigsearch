@@ -42,10 +42,13 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
         $config = Mage::getConfig()->loadModulesConfiguration('system.xml');
         $sections = (array)$config->getNode('sections')->children();
 
+        /** @var Oggetto_AdminConfigSearch_Helper_Data $helper */
+        $helper = Mage::helper('oggetto_adminconfigsearch');
+
         $configArray = [];
         /** @var Mage_Core_Model_Config_Element $section */
         foreach ($sections as $section) {
-            $groups = (array)$section->groups;
+            $groups = (array) $section->groups;
             $urlParams = ['section' => $section->getName()];
             /** @var Mage_Core_Model_Config_Element $group */
             foreach ($groups as $group) {
@@ -58,18 +61,24 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
                         $fieldLabel = strval($field->label);
                         if ($fieldLabel !== '') {
                             $urlParams['fieldset'] = $section->getName() . '_' . $group->getName();
-                            $urlParams['element'] = $field->getName();
-                            $breadcrumbs = strval($section->label) . "->" . $groupLabel;
-                            $path = $section->getName() . '/' . $group->getName() .  '/' . $field->getName();
+                            $urlParams['element']  = $field->getName();
+
+                            $sourceModel = strval($field->source_model);
+                            $breadcrumbs = $helper->__(strval($section->label)) . "->" . $helper->__($groupLabel);
+                            $path        = $section->getName() . '/' . $group->getName() .  '/' . $field->getName();
+                            $value       = $this->getConfigFieldValue($path);
 
                             $configArray[] = [
-                                'label'        => strval($field->label),
-                                'url'          => $this->getUrlForConfigField($urlParams),
-                                'path'         => $path,
-                                'breadcrumbs'  => $breadcrumbs,
-                                'type'         => $this->getSwitchableFieldType(strval($field->source_model)),
-                                'value'        => $this->getConfigFieldValue($path),
-                                'translations' => Mage::helper('oggetto_adminconfigsearch')->__(strval($field->label))
+                                'label' => $fieldLabel,
+                                'url' => $this->getUrlForConfigField($urlParams),
+                                'path' => $path,
+                                'type' => $this->getSwitchableFieldType($sourceModel),
+                                'value' => $helper->__(
+                                    $this->_getConfigValueFromSourceModel($sourceModel, $value)
+                                ),
+                                'field' => $value,
+                                'translations' => $helper->__($fieldLabel),
+                                'breadcrumbs' => $breadcrumbs
                             ];
                         }
 
@@ -119,10 +128,57 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
      */
     public function getSwitchableFieldType($model)
     {
-        if ($model == 'adminhtml/system_config_source_yesno') {
+        if ($model == 'adminhtml/system_config_source_yesno'
+            || $model == 'adminhtml/system_config_source_enabledisable') {
             return 'switchable';
         }
 
         return 'not_switchable';
+    }
+
+    /**
+     * Get config field value from source model
+     *
+     * @param string $sourceModel Source model
+     * @param string $neededValue Value
+     *
+     * @return mixed
+     */
+    protected function _getConfigValueFromSourceModel($sourceModel, $neededValue)
+    {
+        $neededValuesArray  = explode(',', $neededValue);
+        $returnedFieldValue = $neededValue;
+
+        if ($sourceModel !== '') {
+            $valuesArray = [];
+
+            $model = Mage::getModel($sourceModel);
+
+            if (method_exists($model, 'toOptionArray')) {
+                $optionArray = $model->toOptionArray();
+
+                foreach ($optionArray as $option) {
+                    if (in_array($option['value'], $neededValuesArray)) {
+                        $valuesArray[] = $option['label'];
+                    }
+                }
+                $returnedFieldValue = implode(', ', $valuesArray);
+            } else {
+                $modelArray = explode('::', $sourceModel);
+                $model = Mage::getModel($modelArray[0]);
+                if (is_callable($modelArray[0], $modelArray[1])); {
+                    $optionArray = $model::{$modelArray[1]}();
+
+                    foreach ($optionArray as $label => $option) {
+                        if (in_array($label, $neededValuesArray)) {
+                            $valuesArray[] = $option;
+                        }
+                    }
+                    $returnedFieldValue = implode(', ', $valuesArray);
+                }
+            }
+        }
+
+        return $returnedFieldValue;
     }
 }

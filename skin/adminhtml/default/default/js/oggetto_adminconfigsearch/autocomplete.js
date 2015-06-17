@@ -29,16 +29,18 @@ jQuery(function($) {
             var configData = $.map(ConfigSingleton.getConfigArray(), function (item) {
                 return {
                     label: item.label,
-                    value: item.label,
                     field: item.value,
+                    value: item.translations,
                     path: item.path,
                     type: item.type,
                     url: item.url,
+                    fieldValue: item.field,
                     breadcrumbs: item.breadcrumbs,
                     translations: item.translations
                 };
             });
-            var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+
+            var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), 'i' );
             response($.grep(configData, function(item) {
                     return matcher.test(item.label) ||  matcher.test(item.translations);
                 })
@@ -50,11 +52,22 @@ jQuery(function($) {
         },
         minLength: 3
     }).data('ui-autocomplete')._renderItem = function (ul, item) {
-        var label       = $('<div>').addClass('autocomplete-menu-item-label').append(item.label);
+        var fieldText = item.field;
+        var fieldValue;
+
+        var label       = $('<div>').addClass('autocomplete-menu-item-label').append(item.translations);
         var breadcrumbs = $('<div>').addClass('autocomplete-menu-item-breadcrumb').append(item.breadcrumbs);
 
         if (item.type != 'switchable') {
-            var fieldValue = $('<div>').addClass('autocomplete-menu-item-value').append(item.field);
+            var allowedLength = 20;
+
+            if (fieldText.length > allowedLength) {
+                fieldValue = $('<div>').addClass('autocomplete-menu-item-value')
+                    .attr('title', fieldText).append(fieldText.substr(0, allowedLength) + '...');
+            } else {
+                fieldValue = $('<div>').addClass('autocomplete-menu-item-value').append(fieldText);
+            }
+
         }
 
         var li = $('<li>').append(label).append(fieldValue).append(breadcrumbs);
@@ -63,7 +76,7 @@ jQuery(function($) {
             var toggleCheckbox = $('<input />').attr('id', 'myonoffswitch').attr('name', 'onoffswitch')
                 .attr('type', 'checkbox').addClass('onoffswitch-checkbox');
 
-            toggleCheckbox.prop('checked', item.field == true);
+            toggleCheckbox.prop('checked', item.fieldValue == true);
 
             var toggleSwitch = $('<div>').attr('data-field-path', item.path).addClass('onoffswitch')
                 .append(toggleCheckbox)

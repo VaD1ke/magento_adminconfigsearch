@@ -25,7 +25,7 @@ jQuery(function($) {
     $('#config-fields-search').submit(function (event) {
         var searchText = $('#search-settings').val();
         var result = $.grep(ConfigSingleton.getConfigArray(), function(o) {
-            return o.label == searchText;
+            return o.label == searchText || o.translations == searchText;
         });
         location.href = result.length == 0 ? "" : result[0].url;
         event.preventDefault();

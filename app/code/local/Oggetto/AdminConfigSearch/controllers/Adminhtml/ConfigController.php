@@ -47,6 +47,7 @@ class Oggetto_AdminConfigSearch_Adminhtml_ConfigController extends Mage_Core_Con
         /** @var Oggetto_AdminConfigSearch_Helper_Data $helper */
         $helper = Mage::helper('oggetto_adminconfigsearch');
         try {
+
             $value = $helper->switchConfigValue($path);
             $response->success()->setData(['path' => $path, 'value' => $value]);
 

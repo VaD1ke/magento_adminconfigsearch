@@ -4,3 +4,6 @@
 -
   - not_switchable
   - model: model
+-
+  - switchable
+  - model: adminhtml/system_config_source_enabledisable
