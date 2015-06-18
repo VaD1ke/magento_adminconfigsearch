@@ -65,7 +65,8 @@
     right: 10px;
     top: 10px;
     position: absolute;
-    background: url('../../images/preloaders/toggle_switch.gif');
+    background: url('../../images/preloaders/toggle.gif');
+    background-size: cover;
 }
 
 .with-value  {
