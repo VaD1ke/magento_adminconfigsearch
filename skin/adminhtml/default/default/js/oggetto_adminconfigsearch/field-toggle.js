@@ -26,18 +26,22 @@ jQuery(function($) {
         var form = $(this).closest('#config-fields-search');
         var fieldPath = $(this).data('field-path');
         var checkbox = $(this).children('.onoffswitch-checkbox');
+        var label = $(this).find('.onoffswitch-label');
+
         $.ajax({
             url: form.data('url-switch'),
             dataType: 'json',
             method: 'post',
             data: {path: fieldPath},
             success: function(data) {
-                ConfigSingleton.setConfigValue(data.path, data.value);
-                checkbox.prop('checked', data.value == true);
-            },
-            error: function() {
-                var label = $(this).find('.onoffswitch-inner');
-                label.addClass('error');
+                if (data.status == 'success') {
+                    ConfigSingleton.setConfigValue(data.path, data.value);
+                    checkbox.prop('checked', data.value == true);
+                }
+                else {
+                    label.addClass('error');
+                    setTimeout( function() { label.removeClass('error'); }, 1500);
+                }
             }
 
         });

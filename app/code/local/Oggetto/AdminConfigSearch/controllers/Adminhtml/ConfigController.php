@@ -49,7 +49,11 @@ class Oggetto_AdminConfigSearch_Adminhtml_ConfigController extends Mage_Core_Con
         try {
 
             $value = $helper->switchConfigValue($path);
-            $response->success()->setData(['path' => $path, 'value' => $value]);
+            $response->success()->setData([
+                'path'   => $path,
+                'value'  => $value,
+                'status' => 'success'
+            ]);
 
         } catch (Exception $e) {
             $response->error();

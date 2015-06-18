@@ -63,7 +63,7 @@ class Oggetto_AdminConfigSearch_Test_Controller_Adminhtml_Config extends Oggetto
 
         $ajaxResponseMock->expects($this->once())
             ->method('setData')
-            ->with(['path' => $post['path'], 'value' => $value])
+            ->with(['path' => $post['path'], 'value' => $value, 'status' => 'success'])
             ->willReturnSelf();
 
         $ajaxResponseMock->expects($this->never())

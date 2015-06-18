@@ -1,0 +1,4 @@
+switchable:
+  result: true
+not_switchable:
+  result: false

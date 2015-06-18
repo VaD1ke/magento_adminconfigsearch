@@ -51,6 +51,26 @@ class Oggetto_AdminConfigSearch_Test_Model_Config_Fetcher extends EcomDev_PHPUni
     }
 
     /**
+     * Return empty config array if sections array is empty
+     *
+     * @return void
+     */
+    public function testReturnsEmptyConfigArrayIfSectionsArrayIsEmpty()
+    {
+        $modelFetcherMock = $this->getModelMock(
+            'oggetto_adminconfigsearch/config_fetcher', ['_getConfigSectionsArray']
+        );
+
+        $modelFetcherMock->expects($this->once())
+            ->method('_getConfigSectionsArray')
+            ->willReturn([]);
+
+        $this->replaceByMock('model', 'oggetto_adminconfigsearch/config_fetcher', $modelFetcherMock);
+
+        $this->assertEquals([], $modelFetcherMock->getAllConfigFields());
+    }
+
+    /**
      * Return URL for adminhtml helper for config field
      *
      * @return void
@@ -61,7 +81,7 @@ class Oggetto_AdminConfigSearch_Test_Model_Config_Fetcher extends EcomDev_PHPUni
         $urlParams = ['field' => 'test'];
 
         $helperAdminhtmlMock = $this->getMockBuilder('adminhtml')->disableOriginalConstructor()
-        ->setMethods(['getUrl'])->getMock();
+            ->setMethods(['getUrl'])->getMock();
 
         $helperAdminhtmlMock->expects($this->once())
             ->method('getUrl')
@@ -105,10 +125,10 @@ class Oggetto_AdminConfigSearch_Test_Model_Config_Fetcher extends EcomDev_PHPUni
      *
      * @dataProvider dataProvider
      */
-    public function testReturnsSwitchableStatusIfModelIsYesNo($status, $model)
+    public function testReturnsSwitchableStatusIfModelIsYesNoOrEnableDisable($status, $model)
     {
         $this->assertEquals(
-            $this->expected($status)->getResult(), $this->_fetcherModel->getSwitchableFieldType($model['model'])
+            $this->expected($status)->getResult(), $this->_fetcherModel->isFieldTypeSwitchable($model['model'])
         );
     }
 

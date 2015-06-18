@@ -17,20 +17,26 @@
 }
 
 .autocomplete-menu-item-breadcrumb {
+    clear: both;
+    margin: 0 0 5px 5px;
+
     color: #34495e;
     font-size: 7pt;
     line-height: 7pt;
 }
 
 .autocomplete-menu-item-label {
-    margin: 0 38px 3px 0;
+    margin: 5px 38px 3px 5px;
+    max-width: 300px;
+
     color: #2c3e50;
     font-size: 11pt;
     font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
 }
 
 .autocomplete-menu-item-value {
-    margin: 0 5px 0 150px;
+    margin: 5px 5px 10px 0;
+    max-width: 170px;
     float: right;
 
     color: #34495e;
@@ -46,4 +52,10 @@
 
 .error {
     background-color: #c0392b;
+}
+
+.with-value  {
+    float: left;
+    margin: 5px 0 10px 5px;
+    max-width: 220px;
 }

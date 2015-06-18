@@ -39,8 +39,7 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
      */
     public function getAllConfigFields()
     {
-        $config = Mage::getConfig()->loadModulesConfiguration('system.xml');
-        $sections = (array)$config->getNode('sections')->children();
+        $sections = $this->_getConfigSectionsArray();
 
         /** @var Oggetto_AdminConfigSearch_Helper_Data $helper */
         $helper = Mage::helper('oggetto_adminconfigsearch');
@@ -70,15 +69,15 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
 
                             $configArray[] = [
                                 'label' => $fieldLabel,
-                                'url' => $this->getUrlForConfigField($urlParams),
-                                'path' => $path,
-                                'type' => $this->getSwitchableFieldType($sourceModel),
+                                'url'   => $this->getUrlForConfigField($urlParams),
+                                'path'  => $path,
+                                'field' => $value,
                                 'value' => $helper->__(
                                     $this->_getConfigValueFromSourceModel($sourceModel, $value)
                                 ),
-                                'field' => $value,
+                                'switchable'   => $this->isFieldTypeSwitchable($sourceModel),
                                 'translations' => $helper->__($fieldLabel),
-                                'breadcrumbs' => $breadcrumbs
+                                'breadcrumbs'  => $breadcrumbs
                             ];
                         }
 
@@ -126,14 +125,14 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
      *
      * @return string
      */
-    public function getSwitchableFieldType($model)
+    public function isFieldTypeSwitchable($model)
     {
         if ($model == 'adminhtml/system_config_source_yesno'
             || $model == 'adminhtml/system_config_source_enabledisable') {
-            return 'switchable';
+            return true;
         }
 
-        return 'not_switchable';
+        return false;
     }
 
     /**
@@ -166,7 +165,7 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
             } else {
                 $modelArray = explode('::', $sourceModel);
                 $model = Mage::getModel($modelArray[0]);
-                if (is_callable($modelArray[0], $modelArray[1])); {
+                if (is_callable($modelArray[0], $modelArray[1])) {
                     $optionArray = $model::{$modelArray[1]}();
 
                     foreach ($optionArray as $label => $option) {
@@ -180,5 +179,18 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
         }
 
         return $returnedFieldValue;
+    }
+
+    /**
+     * Get system config sections array
+     *
+     * @return array
+     */
+    protected function _getConfigSectionsArray()
+    {
+        $config = Mage::getConfig()->loadModulesConfiguration('system.xml');
+        $sections = (array)$config->getNode('sections')->children();
+
+        return $sections;
     }
 }

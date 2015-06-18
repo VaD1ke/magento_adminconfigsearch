@@ -33,7 +33,7 @@ var ConfigSingleton = (function() {
         setConfigValue: function(path, value) {
             for (var i in configArray) {
                 if (configArray.hasOwnProperty(i) && configArray[i].path == path) {
-                    configArray[i].value = value;
+                    configArray[i].field = value;
                     break;
                 }
             }

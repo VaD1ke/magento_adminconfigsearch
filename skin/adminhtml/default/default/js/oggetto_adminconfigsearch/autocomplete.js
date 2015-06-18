@@ -32,8 +32,8 @@ jQuery(function($) {
                     field: item.value,
                     value: item.translations,
                     path: item.path,
-                    type: item.type,
                     url: item.url,
+                    switchable: item.switchable,
                     fieldValue: item.field,
                     breadcrumbs: item.breadcrumbs,
                     translations: item.translations
@@ -58,7 +58,8 @@ jQuery(function($) {
         var label       = $('<div>').addClass('autocomplete-menu-item-label').append(item.translations);
         var breadcrumbs = $('<div>').addClass('autocomplete-menu-item-breadcrumb').append(item.breadcrumbs);
 
-        if (item.type != 'switchable') {
+        if (!item.switchable) {
+            label.addClass('with-value');
             var allowedLength = 20;
 
             if (fieldText.length > allowedLength) {
@@ -72,7 +73,7 @@ jQuery(function($) {
 
         var li = $('<li>').append(label).append(fieldValue).append(breadcrumbs);
 
-        if (item.type == 'switchable') {
+        if (item.switchable) {
             var toggleCheckbox = $('<input />').attr('id', 'myonoffswitch').attr('name', 'onoffswitch')
                 .attr('type', 'checkbox').addClass('onoffswitch-checkbox');
 
@@ -81,16 +82,14 @@ jQuery(function($) {
             var toggleSwitch = $('<div>').attr('data-field-path', item.path).addClass('onoffswitch')
                 .append(toggleCheckbox)
                 .append(
-                    '<label class="onoffswitch-label" for="myonoffswitch">' +
-                    '<span class="onoffswitch-inner"></span>' +
-                    '<span class="onoffswitch-switch"></span>' +
-                    '</label>'
-                );
+                '<label class="onoffswitch-label" for="myonoffswitch">' +
+                '<span class="onoffswitch-inner"></span>' +
+                '<span class="onoffswitch-switch"></span>' +
+                '</label>'
+            );
 
             li.append(toggleSwitch);
         }
         return li.addClass('autocomplete-menu-item').appendTo( ul );
     };
-
-
 });
