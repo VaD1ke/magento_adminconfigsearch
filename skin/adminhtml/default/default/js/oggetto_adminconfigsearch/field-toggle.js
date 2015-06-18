@@ -23,17 +23,22 @@
 "use strict";
 jQuery(function($) {
     $('.ui-autocomplete').on('click', '.onoffswitch', function(e) {
-        var form = $(this).closest('#config-fields-search');
-        var fieldPath = $(this).data('field-path');
-        var checkbox = $(this).children('.onoffswitch-checkbox');
-        var label = $(this).find('.onoffswitch-label');
+        var onoffswitch = $(this);
+        var form = onoffswitch.closest('#config-fields-search');
+        var fieldPath = onoffswitch.data('field-path');
+        var checkbox = onoffswitch.children('.onoffswitch-checkbox');
+        var label = onoffswitch.find('.onoffswitch-label');
 
         $.ajax({
             url: form.data('url-switch'),
             dataType: 'json',
             method: 'post',
             data: {path: fieldPath},
+            beforeSend: function() {
+                onoffswitch.parent().append($('<div>').addClass('preloader'));
+            },
             success: function(data) {
+                onoffswitch.next('.preloader').remove();
                 if (data.status == 'success') {
                     ConfigSingleton.setConfigValue(data.path, data.value);
                     checkbox.prop('checked', data.value == true);

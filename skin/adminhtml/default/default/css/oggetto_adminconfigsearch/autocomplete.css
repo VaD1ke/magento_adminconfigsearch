@@ -13,10 +13,11 @@
 .autocomplete-menu-item {
     text-align: left;
     position: relative;
+    padding-top: 5px;
 }
 
 .autocomplete-menu-item, .ui-state-focus {
-    border: 1px solid #7f8c8d;
+    border-bottom: 1px solid #ececec;
 }
 
 .autocomplete-menu-item-breadcrumb {
@@ -29,7 +30,7 @@
 }
 
 .autocomplete-menu-item-label {
-    margin: 5px 38px 3px 5px;
+    margin: 0 38px 3px 5px;
     max-width: 300px;
 
     color: #2c3e50;
@@ -38,7 +39,7 @@
 }
 
 .autocomplete-menu-item-value {
-    margin: 5px 5px 10px 0;
+    margin: 0 5px 10px 0;
     max-width: 170px;
     float: right;
 
@@ -69,7 +70,7 @@
 
 .with-value  {
     float: left;
-    margin: 5px 0 10px 5px;
+    margin: 0 0 10px 5px;
     max-width: 220px;
 }
 

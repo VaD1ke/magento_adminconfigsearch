@@ -478,10 +478,6 @@ button.ui-button::-moz-focus-inner {
 	line-height: 0;
 	border-width: 1px 0 0 0;
 }
-.ui-menu .ui-state-focus,
-.ui-menu .ui-state-active {
-	margin: -1px;
-}
 
 /* icon support */
 .ui-menu-icons {
@@ -884,8 +880,7 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-	border: 1px solid #999999;
-	background: #dadada url("/media/jquery/ui-bg_glass_75_dadada_1x400.png") 50% 50% repeat-x;
+	background: #ecf0f1 url("/media/jquery/ui-bg_glass_75_dadada_1x400.png") 50% 50% repeat-x;
 	font-weight: normal;
 	color: #212121;
 }
