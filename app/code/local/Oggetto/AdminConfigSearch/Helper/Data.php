@@ -71,13 +71,14 @@ class Oggetto_AdminConfigSearch_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Get config field value
      *
-     * @param string $path Path to field
+     * @param string      $path  Path to field
+     * @param string|null $store Store
      *
      * @return mixed
      */
-    public function getConfigFieldValue($path)
+    public function getConfigFieldValue($path, $store = null)
     {
-        return Mage::getStoreConfig($path);
+        return Mage::getStoreConfig($path, $store);
     }
 
     /**
@@ -89,10 +90,7 @@ class Oggetto_AdminConfigSearch_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function switchValue($value)
     {
-        if ($value == 1) {
-            return 0;
-        }
-        return 1;
+        return ($value == 1) ? 0 : 1;
     }
 
 

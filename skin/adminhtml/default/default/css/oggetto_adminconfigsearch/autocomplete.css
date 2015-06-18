@@ -4,7 +4,7 @@
     text-align: left;
 }
 .autocomplete-scroll {
-    max-width: 400px;
+    width: 400px;
     max-height: 300px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -13,6 +13,9 @@
 .autocomplete-menu-item {
     text-align: left;
     position: relative;
+}
+
+.autocomplete-menu-item, .ui-state-focus {
     border: 1px solid #7f8c8d;
 }
 
@@ -54,8 +57,22 @@
     background-color: #c0392b;
 }
 
+.preloader {
+    z-index: 11;
+    width: 50px;
+    height: 20px;
+    right: 10px;
+    top: 10px;
+    position: absolute;
+    background: url('../../images/preloaders/toggle_switch.gif');
+}
+
 .with-value  {
     float: left;
     margin: 5px 0 10px 5px;
     max-width: 220px;
+}
+
+.wrapper {
+    min-width: 1200px;
 }

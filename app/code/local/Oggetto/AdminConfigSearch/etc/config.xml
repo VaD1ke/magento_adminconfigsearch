@@ -68,6 +68,15 @@ please refer to http://www.magentocommerce.com for more information.
                 </oggetto_adminconfigsearch>
             </updates>
         </layout>
+        <translate>
+            <modules>
+                <Oggetto_AdminConfigSearch>
+                    <files>
+                        <default>Oggetto_AdminConfigSearch.csv</default>
+                    </files>
+                </Oggetto_AdminConfigSearch>
+            </modules>
+        </translate>
     </adminhtml>
 
     <frontend>

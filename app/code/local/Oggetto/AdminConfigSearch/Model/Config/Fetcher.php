@@ -115,6 +115,9 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
         /** @var Oggetto_AdminConfigSearch_Helper_Data $helper */
         $helper = Mage::helper('oggetto_adminconfigsearch');
 
+        if ($path == 'design/package/name') {
+            return $helper->getConfigFieldValue($path, 'default');
+        }
         return $helper->getConfigFieldValue($path);
     }
 
@@ -158,7 +161,11 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
 
                 foreach ($optionArray as $option) {
                     if (in_array($option['value'], $neededValuesArray)) {
-                        $valuesArray[] = $option['label'];
+                        if ($option['label'] == Mage::helper('oggetto_adminconfigsearch')->__('--Please Select--')) {
+                            $valuesArray[] = Mage::helper('oggetto_adminconfigsearch')->__('Not set');
+                        } else {
+                            $valuesArray[] = $option['label'];
+                        }
                     }
                 }
                 $returnedFieldValue = implode(', ', $valuesArray);
@@ -176,6 +183,10 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
                     $returnedFieldValue = implode(', ', $valuesArray);
                 }
             }
+        }
+
+        if ($returnedFieldValue == '') {
+            $returnedFieldValue = Mage::helper('oggetto_adminconfigsearch')->__('Not set');
         }
 
         return $returnedFieldValue;

@@ -4,5 +4,6 @@
 </script>
 <form id="config-fields-search" class="config-search-form" action="#" method="GET"
       data-url-switch="<?php echo $this->getUrlForFieldValueSwitch(); ?>">
-    <input type="text" id="search-settings" class="autocomplete-input" autocomplete="off" placeholder="config search"><br>
+    <input type="text" id="search-settings" class="autocomplete-input" autocomplete="off"
+           placeholder="<?php echo $this->helper('oggetto_adminconfigsearch')->__('config search'); ?>"><br>
 </form>

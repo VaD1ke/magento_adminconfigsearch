@@ -116,6 +116,29 @@ class Oggetto_AdminConfigSearch_Test_Model_Config_Fetcher extends EcomDev_PHPUni
     }
 
     /**
+     * Return config field value from helper data with design/package/name path from default store
+     *
+     * @return void
+     */
+    public function testReturnsConfigFieldValueFromHelperDataWithDesignPackageNamePathFromDefaultStore()
+    {
+        $path  = 'design/package/name';
+        $store = 'default';
+        $value = 'value';
+
+        $helperDataMock = $this->getHelperMock('oggetto_adminconfigsearch', ['getConfigFieldValue']);
+
+        $helperDataMock->expects($this->once())
+            ->method('getConfigFieldValue')
+            ->with($path, $store)
+            ->willReturn($value);
+
+        $this->replaceByMock('helper', 'oggetto_adminconfigsearch', $helperDataMock);
+
+        $this->assertEquals($value, $this->_fetcherModel->getConfigFieldValue($path));
+    }
+
+    /**
      * Return switchable status if model is yesno
      *
      * @param array $status Status
