@@ -24,8 +24,9 @@
 jQuery(function($) {
     $('#config-fields-search').submit(function (event) {
         var searchText = $('#search-settings').val();
+        var matcher = new RegExp( $.ui.autocomplete.escapeRegex( searchText ), 'i' );
         var result = $.grep(ConfigSingleton.getConfigArray(), function(o) {
-            return o.label == searchText || o.translations == searchText;
+            return matcher.test(o.label) || matcher.test(o.translations);
         });
         location.href = result.length == 0 ? "" : result[0].url;
         event.preventDefault();
