@@ -57,8 +57,8 @@ class Oggetto_AdminConfigSearch_Test_Helper_Data extends EcomDev_PHPUnit_Test_Ca
      */
     public function testReturnsExpectedSwitchedBoolValues()
     {
-        $this->assertEquals(false, $this->_helper->switchValue(true));
-        $this->assertEquals(true, $this->_helper->switchValue(false));
+        $this->assertFalse($this->_helper->switchValue('1'));
+        $this->assertTrue($this->_helper->switchValue('0'));
     }
 
     /**

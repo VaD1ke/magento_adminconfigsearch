@@ -54,4 +54,5 @@ class Oggetto_AdminConfigSearch_Test_Model_Observer extends EcomDev_PHPUnit_Test
 
         $modelObserver->clearConfigCacheAfterChange();
     }
+
 }

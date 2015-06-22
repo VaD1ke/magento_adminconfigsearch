@@ -66,7 +66,7 @@ class Oggetto_AdminConfigSearch_Model_Config_Cache_Provider
      */
     public function clearAdminConfigCache()
     {
-        $this->_dispatchEvent('clean_cache_by_tags', array('tags' => array(
+        $this->dispatchEvent('clean_cache_by_tags', array('tags' => array(
             Mage_Core_Model_Config::CACHE_TAG
         )));
     }
@@ -105,7 +105,7 @@ class Oggetto_AdminConfigSearch_Model_Config_Cache_Provider
      *
      * @return void
      */
-    protected function _dispatchEvent($name, $data)
+    public function dispatchEvent($name, $data)
     {
         Mage::dispatchEvent($name, $data);
     }

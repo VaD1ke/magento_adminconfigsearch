@@ -99,15 +99,32 @@ class Oggetto_AdminConfigSearch_Test_Model_Config_Cache_Provider extends EcomDev
      */
     public function testClearsAdminConfigCacheByDispatchingCleanCacheEvent()
     {
-        $modelProviderMock = $this->getModelMock('oggetto_adminconfigsearch/config_cache_provider', ['_dispatchEvent']);
+        $modelProviderMock = $this->getModelMock('oggetto_adminconfigsearch/config_cache_provider', ['dispatchEvent']);
 
         $modelProviderMock->expects($this->once())
-            ->method('_dispatchEvent')
+            ->method('dispatchEvent')
             ->with('clean_cache_by_tags', array('tags' => array(
                 Mage_Core_Model_Config::CACHE_TAG)));
 
         $this->replaceByMock('model', 'oggetto_adminconfigsearch/config_cache_provider', $modelProviderMock);
 
         $modelProviderMock->clearAdminConfigCache();
+    }
+
+    /**
+     * Check event dispatch with established event name
+     *
+     * @return void
+     */
+    public function testCheckEventDispatchWithEstablishedEventName()
+    {
+        $eventName = 'clean_cache_by_tags';
+
+        /** @var Oggetto_AdminConfigSearch_Model_Config_Cache_Provider $provider */
+        $provider = Mage::getModel('oggetto_adminconfigsearch/config_cache_provider');
+
+        $provider->dispatchEvent($eventName, []);
+
+        $this->assertEventDispatched($eventName);
     }
 }

@@ -62,20 +62,22 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
                             $urlParams['group'] = $section->getName() . '_' . $group->getName();
                             $urlParams['field']  = $field->getName();
 
-                            $sourceModel = strval($field->source_model);
-                            $breadcrumbs = $helper->__(strval($section->label)) . "->" . $helper->__($groupLabel);
-                            $path        = $section->getName() . '/' . $group->getName() .  '/' . $field->getName();
-                            $value       = $this->getConfigFieldValue($path);
-                            $comment     = strval($field->comment);
+                            $sourceModel     = strval($field->source_model);
+                            $breadcrumbs     = $helper->__(strval($section->label)) . "->" . $helper->__($groupLabel);
+                            $path            = $section->getName() . '/' . $group->getName() .  '/' . $field->getName();
+                            $value           = htmlentities($this->getConfigFieldValue($path));
+                            $comment         = strval($field->comment);
+
+                            $valueFromSource = $helper->__(
+                                $this->_getConfigValueFromSourceModel($sourceModel, $value)
+                            );
 
                             $configArray[] = [
                                 'label' => $fieldLabel,
                                 'url'   => $this->getUrlForConfigField($urlParams),
                                 'path'  => $path,
                                 'field' => $value,
-                                'value' => $helper->__(
-                                    $this->_getConfigValueFromSourceModel($sourceModel, $value)
-                                ),
+                                'value' => $valueFromSource,
                                 'comment'            => $comment,
                                 'commentTranslation' => $helper->__($comment),
                                 'switchable'         => $this->isFieldTypeSwitchable($sourceModel),
@@ -153,6 +155,10 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
     {
         $neededValuesArray  = explode(',', $neededValue);
         $returnedFieldValue = $neededValue;
+
+        if ($sourceModel == 'adminhtml/system_config_source_design_robots') {
+            return $neededValue;
+        }
 
         if ($sourceModel !== '') {
             $valuesArray = [];
