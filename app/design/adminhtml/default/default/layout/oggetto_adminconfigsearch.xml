@@ -65,6 +65,7 @@ please refer to http://www.magentocommerce.com for more information.
         </reference>
 
         <reference name="menu">
+            <action method="setTemplate"><template>oggetto_adminconfigsearch/menu.phtml</template></action>
             <block type="oggetto_adminconfigsearch/adminhtml_search" name="menu.search" as="config_search" template="oggetto_adminconfigsearch/search.phtml"/>
         </reference>
     </default>

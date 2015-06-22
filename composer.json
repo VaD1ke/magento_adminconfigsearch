@@ -1,0 +1,33 @@
+{
+    "name": "VaD1ke/oggetto_adminconfigsearch",
+    "type": "magento-module",
+    "license": "OSL-3.0",
+    "description": "Oggetto Admin Config Search module for magento",
+    "authors":[
+        {
+            "name":"Vladislav Slesarenko",
+            "email":"vslesarenko@oggettoweb.com"
+        }
+    ],
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*",
+        "oggettoweb/ajax": "1.*"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/OggettoWeb/ajax"
+        }
+    ],
+    "extra": {
+        "map": [
+            ["app/code/community/Oggetto/AdminConfigSearch", "app/code/local/Oggetto/AdminConfigSearch"],
+            ["app/etc/modules/Oggetto_AdminConfigSearch.xml", "app/etc/modules/Oggetto_AdminConfigSearch.xml"],
+            ["app/design/adminhtml/default/default/layout/oggetto_adminconfigsearch.xml", "app/design/adminhtml/default/default/layout/oggetto_adminconfigsearch.xml"],
+            ["app/design/adminhtml/default/default/template/oggetto_adminconfigsearch", "app/design/adminhtml/default/default/template/oggetto_adminconfigsearch"],
+            ["app/locale/ru_RU", "app/locale/ru_RU"],
+            ["js/lib/jquery", "js/lib/jquery"],
+            ["skin/adminhtml/default/default", "skin/adminhtml/default/default"]
+        ]
+    }
+}
