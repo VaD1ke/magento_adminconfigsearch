@@ -86,7 +86,7 @@ class Oggetto_AdminConfigSearch_Test_Block_Adminhtml_Search extends EcomDev_PHPU
 
         $helperAdminhtmlMock->expects($this->once())
             ->method('getUrl')
-            ->with('oggetto_adminconfigsearch/config/switch')
+            ->with('adminhtml/config/switch')
             ->willReturn($testUrl);
 
         $this->replaceByMock('helper', 'adminhtml', $helperAdminhtmlMock);

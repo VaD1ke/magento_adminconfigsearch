@@ -33,6 +33,11 @@
 class Oggetto_AdminConfigSearch_Block_Adminhtml_Search extends Mage_Adminhtml_Block_Page_Menu
 {
     /**
+     * Id for search caching
+     */
+    const SEARCH_CACHE_KEY = 'oggetto_adminconfigsearch';
+
+    /**
      * Get config array
      *
      * @return string
@@ -41,7 +46,10 @@ class Oggetto_AdminConfigSearch_Block_Adminhtml_Search extends Mage_Adminhtml_Bl
     {
         /** @var Oggetto_AdminConfigSearch_Helper_Data $helper */
         $helper = Mage::helper('oggetto_adminconfigsearch');
-        return $helper->getJsonEncodedSystemConfigArray();
+
+        $configArray = $helper->getJsonEncodedSystemConfigArray();
+
+        return $configArray;
     }
 
     /**
@@ -54,6 +62,8 @@ class Oggetto_AdminConfigSearch_Block_Adminhtml_Search extends Mage_Adminhtml_Bl
         /** @var Mage_Adminhtml_Helper_Data $helper */
         $helper = Mage::helper('adminhtml');
 
-        return $helper->getUrl('oggetto_adminconfigsearch/config/switch');
+        return $helper->getUrl('adminhtml/config/switch');
     }
+
+
 }

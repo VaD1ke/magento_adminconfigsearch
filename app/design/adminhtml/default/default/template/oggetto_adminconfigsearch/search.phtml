@@ -2,8 +2,10 @@
 <script>
     ConfigSingleton.setConfigArray(<?php echo "'" . $this->getConfigArray() . "'"; ?>);
 </script>
+
 <form id="config-fields-search" class="config-search-form" action="#" method="GET"
-      data-url-switch="<?php echo $this->getUrlForFieldValueSwitch(); ?>">
+      data-url-switch="<?php echo $this->getUrlForFieldValueSwitch(); ?>"
+      data-form-key="<?php echo $this->getFormKey() ?>">
     <input type="text" id="search-settings" class="autocomplete-input" autocomplete="off"
            placeholder="<?php echo $this->helper('oggetto_adminconfigsearch')->__('config search'); ?>"><br>
 </form>

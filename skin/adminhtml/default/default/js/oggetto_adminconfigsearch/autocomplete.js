@@ -33,16 +33,19 @@ jQuery(function($) {
                     value: item.translations,
                     path: item.path,
                     url: item.url,
+                    comment: item.comment,
                     switchable: item.switchable,
                     fieldValue: item.field,
                     breadcrumbs: item.breadcrumbs,
-                    translations: item.translations
+                    translations: item.translations,
+                    commentTranslation: item.commentTranslation
                 };
             });
 
             var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), 'i' );
             response($.grep(configData, function(item) {
-                    return matcher.test(item.label) ||  matcher.test(item.translations);
+                    return matcher.test(item.label) ||  matcher.test(item.translations)
+                        || matcher.test(item.comment) || matcher.test(item.commentTranslation);
                 })
 
             );

@@ -24,16 +24,17 @@
 jQuery(function($) {
     $('.ui-autocomplete').on('click', '.onoffswitch', function(e) {
         var onoffswitch = $(this);
-        var form = onoffswitch.closest('#config-fields-search');
-        var fieldPath = onoffswitch.data('field-path');
-        var checkbox = onoffswitch.children('.onoffswitch-checkbox');
-        var label = onoffswitch.find('.onoffswitch-label');
+        var form        = onoffswitch.closest('#config-fields-search');
+        var fieldPath   = onoffswitch.data('field-path');
+        var checkbox    = onoffswitch.children('.onoffswitch-checkbox');
+        var isChecked   = +checkbox.prop('checked');
+        var label       = onoffswitch.find('.onoffswitch-label');
 
         $.ajax({
             url: form.data('url-switch'),
             dataType: 'json',
             method: 'post',
-            data: {path: fieldPath},
+            data: {path: fieldPath, form_key: form.data('form-key'), value: isChecked},
             beforeSend: function() {
                 onoffswitch.parent().append($('<div>').addClass('preloader'));
             },

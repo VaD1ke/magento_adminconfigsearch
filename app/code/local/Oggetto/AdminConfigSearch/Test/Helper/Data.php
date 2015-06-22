@@ -57,8 +57,8 @@ class Oggetto_AdminConfigSearch_Test_Helper_Data extends EcomDev_PHPUnit_Test_Ca
      */
     public function testReturnsExpectedSwitchedBoolValues()
     {
-        $this->assertEquals(0, $this->_helper->switchValue('1'));
-        $this->assertEquals(1, $this->_helper->switchValue('0'));
+        $this->assertEquals(false, $this->_helper->switchValue(true));
+        $this->assertEquals(true, $this->_helper->switchValue(false));
     }
 
     /**
@@ -138,7 +138,43 @@ class Oggetto_AdminConfigSearch_Test_Helper_Data extends EcomDev_PHPUnit_Test_Ca
 
         $this->replaceByMock('model', 'core/config', $modelConfigMock);
 
-        $this->assertEquals($switchedValue, $helperMock->switchConfigValue($path));
+        $this->assertEquals($switchedValue, $helperMock->switchConfigValue($path, $value));
+    }
+
+    /**
+     * Switch store config field value with established path
+     *
+     * @return void
+     */
+    public function testReturnValueIfStoreConfigFieldValueEqualsValueToSwitch()
+    {
+        $path          = 'path';
+        $value         = '0';
+        $switchedValue = '1';
+
+        $helperMock = $this->getHelperMock('oggetto_adminconfigsearch', ['switchValue', 'getConfigFieldValue']);
+
+        $helperMock->expects($this->once())
+            ->method('getConfigFieldValue')
+            ->with($path)
+            ->willReturn($switchedValue);
+
+        $helperMock->expects($this->once())
+            ->method('switchValue')
+            ->with($value)
+            ->willReturn($switchedValue);
+
+        $this->replaceByMock('helper', 'oggetto_adminconfigsearch', $helperMock);
+
+
+        $modelConfigMock = $this->getModelMock('core/config', ['saveConfig']);
+
+        $modelConfigMock->expects($this->never())
+            ->method('saveConfig');
+
+        $this->replaceByMock('model', 'core/config', $modelConfigMock);
+
+        $this->assertEquals($value, $helperMock->switchConfigValue($path, $value));
     }
 
     /**

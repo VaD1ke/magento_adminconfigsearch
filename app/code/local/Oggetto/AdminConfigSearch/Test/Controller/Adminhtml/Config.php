@@ -33,13 +33,25 @@
 class Oggetto_AdminConfigSearch_Test_Controller_Adminhtml_Config extends Oggetto_Phpunit_Test_Case_Controller_Adminhtml
 {
     /**
+     * Set up initial variables
+     *
+     * @return void
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->_setUpAdminSession();
+    }
+
+
+    /**
      * Switch config value and send success ajax
      *
      * @return void
      */
     public function testSwitchesConfigValueAndSendSuccessAjax()
     {
-        $post  = ['path' => 'test'];
+        $post  = ['path' => 'test', 'value' => 0];
         $value = 'value';
 
         $this->getRequest()->setMethod('POST');
@@ -49,7 +61,7 @@ class Oggetto_AdminConfigSearch_Test_Controller_Adminhtml_Config extends Oggetto
 
         $helperMock->expects($this->once())
             ->method('switchConfigValue')
-            ->with($post['path'])
+            ->with($post['path'], $post['value'])
             ->willReturn($value);
 
         $this->replaceByMock('helper', 'oggetto_adminconfigsearch', $helperMock);
@@ -81,7 +93,7 @@ class Oggetto_AdminConfigSearch_Test_Controller_Adminhtml_Config extends Oggetto
         $this->replaceByMock('helper', 'ajax', $helperAjaxMock);
 
 
-        $this->dispatch('oggetto_adminconfigsearch/config/switch');
+        $this->dispatch('adminhtml/config/switch');
 
         $this->_assertRequestsDispatchForwardAndController('switch');
     }
@@ -93,7 +105,7 @@ class Oggetto_AdminConfigSearch_Test_Controller_Adminhtml_Config extends Oggetto
      */
     public function testThrowsExceptionWhenSwitchConfigValueAndSendErrorAjax()
     {
-        $post  = ['path' => 'test'];
+        $post  = ['path' => 'test', 'value' => 0];
 
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
@@ -132,7 +144,7 @@ class Oggetto_AdminConfigSearch_Test_Controller_Adminhtml_Config extends Oggetto
         $this->replaceByMock('helper', 'ajax', $helperAjaxMock);
 
 
-        $this->dispatch('oggetto_adminconfigsearch/config/switch');
+        $this->dispatch('adminhtml/config/switch');
 
         $this->_assertRequestsDispatchForwardAndController('switch');
     }

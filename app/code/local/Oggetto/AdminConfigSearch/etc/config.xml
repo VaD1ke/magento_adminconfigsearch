@@ -33,7 +33,7 @@ please refer to http://www.magentocommerce.com for more information.
             <adminhtml>
                 <args>
                     <modules>
-                        <Oggetto_AdminConfigSearch after="Mage_Adminhtml">Oggetto_AdminConfigSearch_Adminhtml</Oggetto_AdminConfigSearch>
+                        <Oggetto_AdminConfigSearch before="Mage_Adminhtml">Oggetto_AdminConfigSearch_Adminhtml</Oggetto_AdminConfigSearch>
                     </modules>
                 </args>
             </adminhtml>
@@ -78,18 +78,6 @@ please refer to http://www.magentocommerce.com for more information.
             </modules>
         </translate>
     </adminhtml>
-
-    <frontend>
-        <routers>
-            <oggetto_adminconfigsearch>
-                <use>standard</use>
-                <args>
-                    <module>Oggetto_AdminConfigSearch</module>
-                    <frontName>admin</frontName>
-                </args>
-            </oggetto_adminconfigsearch>
-        </routers>
-    </frontend>
 
     <phpunit>
         <suite>

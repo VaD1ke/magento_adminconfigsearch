@@ -68,4 +68,13 @@ please refer to http://www.magentocommerce.com for more information.
             <block type="oggetto_adminconfigsearch/adminhtml_search" name="menu.search" as="config_search" template="oggetto_adminconfigsearch/search.phtml"/>
         </reference>
     </default>
+
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/oggetto_adminconfigsearch/highlight-field.js</name>
+            </action>
+        </reference>
+    </adminhtml_system_config_edit>
 </layout>

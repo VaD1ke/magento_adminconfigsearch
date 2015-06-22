@@ -59,13 +59,14 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
 
                         $fieldLabel = strval($field->label);
                         if ($fieldLabel !== '') {
-                            $urlParams['fieldset'] = $section->getName() . '_' . $group->getName();
-                            $urlParams['element']  = $field->getName();
+                            $urlParams['group'] = $section->getName() . '_' . $group->getName();
+                            $urlParams['field']  = $field->getName();
 
                             $sourceModel = strval($field->source_model);
                             $breadcrumbs = $helper->__(strval($section->label)) . "->" . $helper->__($groupLabel);
                             $path        = $section->getName() . '/' . $group->getName() .  '/' . $field->getName();
                             $value       = $this->getConfigFieldValue($path);
+                            $comment     = strval($field->comment);
 
                             $configArray[] = [
                                 'label' => $fieldLabel,
@@ -75,9 +76,11 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
                                 'value' => $helper->__(
                                     $this->_getConfigValueFromSourceModel($sourceModel, $value)
                                 ),
-                                'switchable'   => $this->isFieldTypeSwitchable($sourceModel),
-                                'translations' => $helper->__($fieldLabel),
-                                'breadcrumbs'  => $breadcrumbs
+                                'comment'            => $comment,
+                                'commentTranslation' => $helper->__($comment),
+                                'switchable'         => $this->isFieldTypeSwitchable($sourceModel),
+                                'translations'       => $helper->__($fieldLabel),
+                                'breadcrumbs'        => $breadcrumbs
                             ];
                         }
 

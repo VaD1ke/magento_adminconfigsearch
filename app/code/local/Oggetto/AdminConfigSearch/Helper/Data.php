@@ -53,18 +53,21 @@ class Oggetto_AdminConfigSearch_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Set switched config value
      *
-     * @param string $path Path to config value
+     * @param string $path  Path to config value
+     * @param mixed  $value Switch value
      *
      * @return mixed
      */
-    public function switchConfigValue($path)
+    public function switchConfigValue($path, $value)
     {
-        $value = $this->switchValue($this->getConfigFieldValue($path));
+        $switchedValue = $this->switchValue($value);
 
-        /** @var Mage_Core_Model_Config $coreConfig */
-        $coreConfig = Mage::getModel('core/config');
+        if ((int)$value == (int)$this->getConfigFieldValue($path)) {
+            $this->_saveConfigWithCacheCleaning($path, $switchedValue);
 
-        $coreConfig->saveConfig($path, $value);
+            return $switchedValue;
+        }
+
         return $value;
     }
 
@@ -90,7 +93,7 @@ class Oggetto_AdminConfigSearch_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function switchValue($value)
     {
-        return ($value == 1) ? 0 : 1;
+        return !$value;
     }
 
 
@@ -103,5 +106,21 @@ class Oggetto_AdminConfigSearch_Helper_Data extends Mage_Core_Helper_Abstract
     protected function _addSlashes($str)
     {
         return addslashes($str);
+    }
+
+    /**
+     * Save config with cache cleaning
+     *
+     * @param string $path  Path
+     * @param mixed  $value Value
+     *
+     * @return void
+     */
+    protected function _saveConfigWithCacheCleaning($path, $value)
+    {
+        /** @var Mage_Core_Model_Config $coreConfig */
+        $coreConfig = Mage::getModel('core/config');
+
+        $coreConfig->saveConfig($path, $value);
     }
 }

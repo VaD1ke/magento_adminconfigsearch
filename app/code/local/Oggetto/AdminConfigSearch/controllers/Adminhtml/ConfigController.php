@@ -30,7 +30,7 @@
  * @subpackage controllers
  * @author     Vladislav Slesarenko <vslesarenko@oggettoweb.com>
  */
-class Oggetto_AdminConfigSearch_Adminhtml_ConfigController extends Mage_Core_Controller_Front_Action
+class Oggetto_AdminConfigSearch_Adminhtml_ConfigController extends Mage_Adminhtml_Controller_Action
 {
     /**
      * Switch config value
@@ -39,7 +39,8 @@ class Oggetto_AdminConfigSearch_Adminhtml_ConfigController extends Mage_Core_Con
      */
     public function switchAction()
     {
-        $path = $this->getRequest()->getPost('path');
+        $path  = $this->getRequest()->getPost('path');
+        $value = $this->getRequest()->getPost('value');
 
         /** @var Oggetto_Ajax_Model_Response $response */
         $response = Mage::getModel('ajax/response');
@@ -48,10 +49,10 @@ class Oggetto_AdminConfigSearch_Adminhtml_ConfigController extends Mage_Core_Con
         $helper = Mage::helper('oggetto_adminconfigsearch');
         try {
 
-            $value = $helper->switchConfigValue($path);
+            $switchedValue = $helper->switchConfigValue($path, $value);
             $response->success()->setData([
                 'path'   => $path,
-                'value'  => $value,
+                'value'  => $switchedValue,
                 'status' => 'success'
             ]);
 
