@@ -63,12 +63,18 @@ class Oggetto_AdminConfigSearch_Helper_Data extends Mage_Core_Helper_Abstract
         $switchedValue = $this->switchValue($value);
 
         if ((int)$value == (int)$this->getConfigFieldValue($path)) {
-            $this->_saveConfigWithCacheCleaning($path, $switchedValue);
+            /** @var Mage_Core_Model_Config $coreConfig */
+            $coreConfig = Mage::getModel('core/config');
 
-            return $switchedValue;
+            $coreConfig->saveConfig($path, $switchedValue);
+
+            /** @var Oggetto_AdminConfigSearch_Model_Config_Cache_Provider $cacheProvider */
+            $cacheProvider = Mage::getModel('oggetto_adminconfigsearch/config_cache_provider');
+
+            $cacheProvider->clearAdminConfigCache();
         }
 
-        return $value;
+        return $switchedValue;
     }
 
     /**
@@ -106,21 +112,5 @@ class Oggetto_AdminConfigSearch_Helper_Data extends Mage_Core_Helper_Abstract
     protected function _addSlashes($str)
     {
         return addslashes($str);
-    }
-
-    /**
-     * Save config with cache cleaning
-     *
-     * @param string $path  Path
-     * @param mixed  $value Value
-     *
-     * @return void
-     */
-    protected function _saveConfigWithCacheCleaning($path, $value)
-    {
-        /** @var Mage_Core_Model_Config $coreConfig */
-        $coreConfig = Mage::getModel('core/config');
-
-        $coreConfig->saveConfig($path, $value);
     }
 }

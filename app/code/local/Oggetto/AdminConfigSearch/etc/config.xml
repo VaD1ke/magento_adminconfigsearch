@@ -58,6 +58,18 @@ please refer to http://www.magentocommerce.com for more information.
                 <class>Oggetto_AdminConfigSearch_Model</class>
             </oggetto_adminconfigsearch>
         </models>
+
+        <events>
+            <admin_system_config_section_save_after>
+                <observers>
+                    <unique_admin_system_config_section_save_after>
+                        <type>singleton</type>
+                        <class>oggetto_adminconfigsearch/observer</class>
+                        <method>clearConfigCacheAfterChange</method>
+                    </unique_admin_system_config_section_save_after>
+                </observers>
+            </admin_system_config_section_save_after>
+        </events>
     </global>
 
     <adminhtml>

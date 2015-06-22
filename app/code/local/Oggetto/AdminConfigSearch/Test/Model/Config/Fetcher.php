@@ -23,7 +23,7 @@
  */
 
 /**
- * Test class for vonfig fetcher
+ * Test class for config fetcher
  *
  * @category   Oggetto
  * @package    Oggetto_AdminConfigSearch

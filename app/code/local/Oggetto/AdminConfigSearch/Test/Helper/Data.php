@@ -138,6 +138,18 @@ class Oggetto_AdminConfigSearch_Test_Helper_Data extends EcomDev_PHPUnit_Test_Ca
 
         $this->replaceByMock('model', 'core/config', $modelConfigMock);
 
+
+        $modelProviderMock = $this->getModelMock(
+                'oggetto_adminconfigsearch/config_cache_provider',
+                ['clearAdminConfigCache']
+        );
+
+        $modelProviderMock->expects($this->once())
+            ->method('clearAdminConfigCache');
+
+        $this->replaceByMock('model', 'oggetto_adminconfigsearch/config_cache_provider', $modelProviderMock);
+
+
         $this->assertEquals($switchedValue, $helperMock->switchConfigValue($path, $value));
     }
 
@@ -146,7 +158,7 @@ class Oggetto_AdminConfigSearch_Test_Helper_Data extends EcomDev_PHPUnit_Test_Ca
      *
      * @return void
      */
-    public function testReturnValueIfStoreConfigFieldValueEqualsValueToSwitch()
+    public function testReturnsValueIfStoreConfigFieldValueEqualsValueToSwitch()
     {
         $path          = 'path';
         $value         = '0';
@@ -174,7 +186,19 @@ class Oggetto_AdminConfigSearch_Test_Helper_Data extends EcomDev_PHPUnit_Test_Ca
 
         $this->replaceByMock('model', 'core/config', $modelConfigMock);
 
-        $this->assertEquals($value, $helperMock->switchConfigValue($path, $value));
+
+        $modelProviderMock = $this->getModelMock(
+            'oggetto_adminconfigsearch/config_cache_provider',
+            ['clearAdminConfigCache']
+        );
+
+        $modelProviderMock->expects($this->never())
+            ->method('clearAdminConfigCache');
+
+        $this->replaceByMock('model', 'oggetto_adminconfigsearch/config_cache_provider', $modelProviderMock);
+
+
+        $this->assertEquals($switchedValue, $helperMock->switchConfigValue($path, $value));
     }
 
     /**

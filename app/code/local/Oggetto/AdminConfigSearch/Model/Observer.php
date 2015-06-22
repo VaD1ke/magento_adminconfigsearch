@@ -23,51 +23,25 @@
  */
 
 /**
- * Block class for search system config fields
+ * Observer model
  *
  * @category   Oggetto
  * @package    Oggetto_AdminConfigSearch
- * @subpackage Block
+ * @subpackage Model
  * @author     Vladislav Slesarenko <vslesarenko@oggettoweb.com>
  */
-class Oggetto_AdminConfigSearch_Block_Adminhtml_Search extends Mage_Adminhtml_Block_Page_Menu
+class Oggetto_AdminConfigSearch_Model_Observer
 {
     /**
-     * Get config array
+     * Clear admin config cache after change
      *
-     * @return string
+     * @return void
      */
-    public function getConfigArray()
+    public function clearConfigCacheAfterChange()
     {
         /** @var Oggetto_AdminConfigSearch_Model_Config_Cache_Provider $cacheProvider */
         $cacheProvider = Mage::getModel('oggetto_adminconfigsearch/config_cache_provider');
 
-        $configArray = $cacheProvider->loadSearchCache();
-
-        if (!$configArray) {
-            /** @var Oggetto_AdminConfigSearch_Helper_Data $helper */
-            $helper = Mage::helper('oggetto_adminconfigsearch');
-
-            $configArray = $helper->getJsonEncodedSystemConfigArray();
-
-            $cacheProvider->saveSearchCache($configArray);
-        }
-
-        return $configArray;
+        $cacheProvider->clearAdminConfigCache();
     }
-
-    /**
-     * Get URL for field value switch
-     *
-     * @return mixed
-     */
-    public function getUrlForFieldValueSwitch()
-    {
-        /** @var Mage_Adminhtml_Helper_Data $helper */
-        $helper = Mage::helper('adminhtml');
-
-        return $helper->getUrl('adminhtml/config/switch');
-    }
-
-
 }

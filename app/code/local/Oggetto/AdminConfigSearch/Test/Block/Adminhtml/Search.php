@@ -51,15 +51,31 @@ class Oggetto_AdminConfigSearch_Test_Block_Adminhtml_Search extends EcomDev_PHPU
     }
 
     /**
-     * Return JSON config array for autocomplete from helper
+     * Return JSON config array for autocomplete from helper if searchCacheIsEmpty
      *
      * @return void
      */
-    public function testReturnsJsonConfigArrayForAutocompleteFromHelper()
+    public function testReturnsJsonConfigArrayForAutocompleteFromHelperIfSearchCacheIsEmpty()
     {
         $this->replaceByMock('singleton', 'core/session', $this->getModelMock('core/session', ['start']));
 
-        $configArray = ['label' => 'Test'];
+        $cacheArray = false;
+        $configArray = ['label' => 'Test1'];
+
+        $modelCacheMock = $this->getModelMock('oggetto_adminconfigsearch/config_cache_provider', [
+            'loadSearchCache', 'saveSearchCache'
+        ]);
+
+        $modelCacheMock->expects($this->once())
+            ->method('loadSearchCache')
+            ->willReturn($cacheArray);
+
+        $modelCacheMock->expects($this->once())
+            ->method('saveSearchCache')
+            ->with($configArray);
+
+        $this->replaceByMock('model', 'oggetto_adminconfigsearch/config_cache_provider', $modelCacheMock);
+
 
         $helperMock = $this->getHelperMock('oggetto_adminconfigsearch', ['getJsonEncodedSystemConfigArray']);
 
@@ -70,6 +86,41 @@ class Oggetto_AdminConfigSearch_Test_Block_Adminhtml_Search extends EcomDev_PHPU
         $this->replaceByMock('helper', 'oggetto_adminconfigsearch', $helperMock);
 
         $this->assertEquals($configArray, $this->_searchBlock->getConfigArray());
+    }
+
+    /**
+     * Return config array from search cache
+     *
+     * @return void
+     */
+    public function testReturnsConfigArrayFromSearchCache()
+    {
+        $this->replaceByMock('singleton', 'core/session', $this->getModelMock('core/session', ['start']));
+
+        $cacheArray = ['label' => 'Test'];
+
+        $modelCacheMock = $this->getModelMock('oggetto_adminconfigsearch/config_cache_provider', [
+            'loadSearchCache', 'saveSearchCache'
+        ]);
+
+        $modelCacheMock->expects($this->once())
+            ->method('loadSearchCache')
+            ->willReturn($cacheArray);
+
+        $modelCacheMock->expects($this->never())
+            ->method('saveSearchCache');
+
+        $this->replaceByMock('model', 'oggetto_adminconfigsearch/config_cache_provider', $modelCacheMock);
+
+
+        $helperMock = $this->getHelperMock('oggetto_adminconfigsearch', ['getJsonEncodedSystemConfigArray']);
+
+        $helperMock->expects($this->never())
+            ->method('getJsonEncodedSystemConfigArray');
+
+        $this->replaceByMock('helper', 'oggetto_adminconfigsearch', $helperMock);
+
+        $this->assertEquals($cacheArray, $this->_searchBlock->getConfigArray());
     }
 
     /**
