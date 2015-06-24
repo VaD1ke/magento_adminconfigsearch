@@ -26,9 +26,10 @@
             ["app/etc/modules/Oggetto_AdminConfigSearch.xml", "app/etc/modules/Oggetto_AdminConfigSearch.xml"],
             ["app/design/adminhtml/default/default/layout/oggetto_adminconfigsearch.xml", "app/design/adminhtml/default/default/layout/oggetto_adminconfigsearch.xml"],
             ["app/design/adminhtml/default/default/template/oggetto_adminconfigsearch", "app/design/adminhtml/default/default/template/oggetto_adminconfigsearch"],
-            ["app/locale/ru_RU", "app/locale/ru_RU"],
-            ["js/lib/jquery", "js/lib/jquery"],
-            ["skin/adminhtml/default/default", "skin/adminhtml/default/default"]
+            ["app/locale/ru_RU/Oggetto_AdminConfigSearch.csv", "app/locale/ru_RU/Oggetto_AdminConfigSearch.csv"],
+            ["skin/adminhtml/default/default/css/oggetto_adminconfigsearch", "skin/adminhtml/default/default/css/oggetto_adminconfigsearch"],
+            ["skin/adminhtml/default/default/js/oggetto_adminconfigsearch", "skin/adminhtml/default/default/js/oggetto_adminconfigsearch"],
+            ["skin/adminhtml/default/default/images/oggetto_adminconfigsearch/preloaders", "skin/adminhtml/default/default/images/oggetto_adminconfigsearch/preloaders"]
         ]
     }
 }

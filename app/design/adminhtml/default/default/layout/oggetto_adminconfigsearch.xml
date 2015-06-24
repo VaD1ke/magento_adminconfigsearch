@@ -26,7 +26,7 @@ please refer to http://www.magentocommerce.com for more information.
         <reference name="head">
             <action method="addItem">
                 <type>skin_css</type>
-                <name>css/jquery/jquery-ui.css</name>
+                <name>css/oggetto_adminconfigsearch/jquery/jquery-ui.css</name>
             </action>
             <action method="addItem">
                 <type>skin_css</type>
@@ -36,11 +36,14 @@ please refer to http://www.magentocommerce.com for more information.
                 <type>skin_css</type>
                 <name>css/oggetto_adminconfigsearch/toggle.css</name>
             </action>
-            <action method="addJs">
-                <name>lib/jquery/jquery-2.1.4.min.js</name>
+
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/oggetto_adminconfigsearch/jquery/jquery-2.1.4.min.js</name>
             </action>
-            <action method="addJs">
-                <script>lib/jquery/noconflict.js</script>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/oggetto_adminconfigsearch/jquery/noconflict.js</name>
             </action>
             <action method="addItem">
                 <type>skin_js</type>
@@ -48,7 +51,7 @@ please refer to http://www.magentocommerce.com for more information.
             </action>
             <action method="addItem">
                 <type>skin_js</type>
-                <name>js/jquery/jquery-ui.js</name>
+                <name>js/oggetto_adminconfigsearch/jquery/jquery-ui.js</name>
             </action>
             <action method="addItem">
                 <type>skin_js</type>
