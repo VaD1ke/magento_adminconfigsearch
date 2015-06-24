@@ -25,7 +25,7 @@ please refer to http://www.magentocommerce.com for more information.
     <modules>
         <Oggetto_AdminConfigSearch>
             <active>true</active>
-            <codePool>local</codePool>
+            <codePool>community</codePool>
         </Oggetto_AdminConfigSearch>
     </modules>
 </config>
