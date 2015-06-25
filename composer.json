@@ -3,7 +3,6 @@
     "type": "magento-module",
     "license": "OSL-3.0",
     "description": "Oggetto Admin Config Search module for magento",
-    "version": "1.0.0",
     "authors":[
         {
             "name":"Vladislav Slesarenko",
@@ -11,15 +10,8 @@
         }
     ],
     "require": {
-        "magento-hackathon/magento-composer-installer": "*",
-        "oggettoweb/ajax": "1.*"
+        "magento-hackathon/magento-composer-installer": "*"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/OggettoWeb/ajax"
-        }
-    ],
     "extra": {
         "map": [
             ["app/code/local/Oggetto/AdminConfigSearch", "app/code/community/Oggetto/AdminConfigSearch"],
