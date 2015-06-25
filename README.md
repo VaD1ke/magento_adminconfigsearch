@@ -32,7 +32,7 @@ Don't forget to set 'Allow Symlink' to 'Yes' in system->configuration->Advanced-
 ## Features
 
 - The minimum number of characters a user must type before a search is performed is 3.
-- Module searchs by config setting (field) name (label) and comment.
+- Module searchs by config setting's (field) name (label) and comment.
 - Search is performed in Russian (if you have translations) and English languages.
 - If setting's value not set suggest displaying 'Not set'
 - Module is using jQuery Autocomplete for suggest.

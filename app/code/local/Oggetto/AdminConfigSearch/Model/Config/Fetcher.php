@@ -60,7 +60,7 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
                         $fieldLabel = strval($field->label);
                         if ($fieldLabel !== '') {
                             $urlParams['group'] = $section->getName() . '_' . $group->getName();
-                            $urlParams['field']  = $field->getName();
+                            $urlParams['field'] = $field->getName();
 
                             $sourceModel     = strval($field->source_model);
                             $breadcrumbs     = $helper->__(strval($section->label)) . "->" . $helper->__($groupLabel);
@@ -121,7 +121,7 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
         $helper = Mage::helper('oggetto_adminconfigsearch');
 
         if ($path == 'design/package/name') {
-            return $helper->getConfigFieldValue($path, 'default');
+            return $helper->getConfigFieldValue($path, Mage::app()->getDefaultStoreView()->getCode());
         }
         return $helper->getConfigFieldValue($path);
     }
@@ -166,10 +166,10 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
             $model = Mage::getModel($sourceModel);
 
             if (method_exists($model, 'toOptionArray')) {
-                $optionArray = $model->toOptionArray();
+                $optionArray = $model->toOptionArray(true);
 
                 foreach ($optionArray as $option) {
-                    if (in_array($option['value'], $neededValuesArray)) {
+                    if (isset($option['value']) && in_array($option['value'], $neededValuesArray)) {
                         if ($option['label'] == Mage::helper('oggetto_adminconfigsearch')->__('--Please Select--')) {
                             $valuesArray[] = Mage::helper('oggetto_adminconfigsearch')->__('Not set');
                         } else {
@@ -182,7 +182,7 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
                 $modelArray = explode('::', $sourceModel);
                 $model = Mage::getModel($modelArray[0]);
                 if (is_callable($modelArray[0], $modelArray[1])) {
-                    $optionArray = $model::{$modelArray[1]}();
+                    $optionArray = $model->$modelArray[1]();
 
                     foreach ($optionArray as $label => $option) {
                         if (in_array($label, $neededValuesArray)) {
