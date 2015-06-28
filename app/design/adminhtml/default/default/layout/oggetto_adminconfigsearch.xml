@@ -55,6 +55,14 @@ please refer to http://www.magentocommerce.com for more information.
             </action>
             <action method="addItem">
                 <type>skin_js</type>
+                <name>js/oggetto_adminconfigsearch/fuzzy/fuzzyset.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/oggetto_adminconfigsearch/fuzzy-search.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
                 <name>js/oggetto_adminconfigsearch/autocomplete.js</name>
             </action>
             <action method="addItem">

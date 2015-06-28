@@ -43,12 +43,17 @@ jQuery(function($) {
                 };
             });
 
-            var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term.trim() ), 'i' );
-            response($.grep(configData, function(item) {
-                    return matcher.test(item.label) ||  matcher.test(item.translations)
-                        || matcher.test(item.comment) || matcher.test(item.commentTranslation);
-                })
+            var requestStr = request.term.trim();
+            var matcher = new RegExp( $.ui.autocomplete.escapeRegex( requestStr ), 'i' );
 
+            response($.grep(configData, function(item) {
+                    if (matcher.test(item.label) ||  matcher.test(item.translations)
+                        || matcher.test(item.comment) || matcher.test(item.commentTranslation)){
+                        return true;
+                    }
+
+                    return searchFuzzy(item.label.trim(), requestStr);
+                })
             );
         },
         select: function (event, ui) {
