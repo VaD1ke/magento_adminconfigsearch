@@ -22,11 +22,19 @@
 
 .autocomplete-menu-item-breadcrumb {
     clear: both;
-    margin: 0 0 5px 5px;
+    margin: 7px 0 5px 5px;
 
     color: #34495e;
     font-size: 7pt;
     line-height: 7pt;
+}
+
+.autocomplete-menu-item-value + .autocomplete-menu-item-breadcrumb {
+    margin-top: 0;
+}
+
+.with-value .autocomplete-menu-item-breadcrumb {
+    margin-top: 0;
 }
 
 .autocomplete-menu-item-label {

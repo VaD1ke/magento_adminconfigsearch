@@ -24,6 +24,7 @@
 jQuery(function($) {
     var searchSettings = $('#search-settings');
     searchSettings.autocomplete({
+        autoFocus: true,
         appendTo: '#config-fields-search',
         source: function (request, response) {
             var configData = $.map(ConfigSingleton.getConfigArray(), function (item) {
@@ -56,22 +57,22 @@ jQuery(function($) {
         minLength: 3
     }).data('ui-autocomplete')._renderItem = function (ul, item) {
         var fieldText = item.field;
+
         var fieldValue;
 
-        var label       = $('<div>').addClass('autocomplete-menu-item-label').append(item.translations);
+        var label = $('<div>').addClass('autocomplete-menu-item-label').append(item.translations);
         var breadcrumbs = $('<div>').addClass('autocomplete-menu-item-breadcrumb').append(item.breadcrumbs);
 
         if (!item.switchable) {
             label.addClass('with-value');
-            var allowedLength = 20;
+            var allowedFieldLength = 20;
 
-            if (fieldText.length > allowedLength) {
+            if (fieldText.length > allowedFieldLength) {
                 fieldValue = $('<div>').addClass('autocomplete-menu-item-value')
-                    .attr('title', fieldText).append(fieldText.substr(0, allowedLength) + '...');
+                    .attr('title', fieldText).append(fieldText.substr(0, allowedFieldLength) + '...');
             } else {
                 fieldValue = $('<div>').addClass('autocomplete-menu-item-value').append(fieldText);
             }
-
         }
 
         var li = $('<li>').append(label).append(fieldValue).append(breadcrumbs);

@@ -23,12 +23,19 @@
 "use strict";
 jQuery(function($) {
     $('#config-fields-search').submit(function (event) {
-        var searchText = $('#search-settings').val();
-        var matcher = new RegExp( $.ui.autocomplete.escapeRegex( searchText ), 'i' );
-        var result = $.grep(ConfigSingleton.getConfigArray(), function(o) {
-            return matcher.test(o.label) || matcher.test(o.translations);
-        });
-        location.href = result.length == 0 ? "" : result[0].url;
-        event.preventDefault();
+        var ul = $('#config-fields-search').find('ul');
+
+        var li = ul.children().first();
+        if (li.length) {
+            var input = $('#search-settings');
+            input.data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item:{value:input.val()}});
+        } else {
+            event.preventDefault();
+        }
+    }).on('focus', '#search-settings', function () {
+        var ul = $(this).closest('#config-fields-search').find('ul');
+        if (!ul.is(':visible')) {
+            ul.show();
+        }
     });
 });

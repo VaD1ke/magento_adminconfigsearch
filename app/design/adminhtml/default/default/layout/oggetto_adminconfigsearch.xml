@@ -59,7 +59,7 @@ please refer to http://www.magentocommerce.com for more information.
             </action>
             <action method="addItem">
                 <type>skin_js</type>
-                <name>js/oggetto_adminconfigsearch/form-submitting.js</name>
+                <name>js/oggetto_adminconfigsearch/form-events.js</name>
             </action>
             <action method="addItem">
                 <type>skin_js</type>
