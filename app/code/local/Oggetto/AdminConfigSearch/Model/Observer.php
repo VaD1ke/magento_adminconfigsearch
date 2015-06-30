@@ -43,5 +43,6 @@ class Oggetto_AdminConfigSearch_Model_Observer
         $cacheProvider = Mage::getModel('oggetto_adminconfigsearch/config_cache_provider');
 
         $cacheProvider->clearAdminConfigCache();
+        $cacheProvider->clearBlockHtmlCache();
     }
 }

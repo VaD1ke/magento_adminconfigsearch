@@ -72,6 +72,18 @@ class Oggetto_AdminConfigSearch_Model_Config_Cache_Provider
     }
 
     /**
+     * Clear block html cache
+     *
+     * @return void
+     */
+    public function clearBlockHtmlCache()
+    {
+        $this->dispatchEvent('clean_cache_by_tags', array('tags' => array(
+            Mage_Core_Block_Abstract::CACHE_GROUP
+        )));
+    }
+
+    /**
      * Load cache
      *
      * @param string $cacheKey Cache key

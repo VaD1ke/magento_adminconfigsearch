@@ -72,6 +72,7 @@ class Oggetto_AdminConfigSearch_Helper_Data extends Mage_Core_Helper_Abstract
             $cacheProvider = Mage::getModel('oggetto_adminconfigsearch/config_cache_provider');
 
             $cacheProvider->clearAdminConfigCache();
+            $cacheProvider->clearBlockHtmlCache();
         }
 
         return $switchedValue;

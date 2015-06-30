@@ -44,11 +44,14 @@ class Oggetto_AdminConfigSearch_Test_Model_Observer extends EcomDev_PHPUnit_Test
 
         $modelProviderMock = $this->getModelMock(
             'oggetto_adminconfigsearch/config_cache_provider',
-            ['clearAdminConfigCache']
+            ['clearAdminConfigCache', 'clearBlockHtmlCache']
         );
 
         $modelProviderMock->expects($this->once())
             ->method('clearAdminConfigCache');
+
+        $modelProviderMock->expects($this->once())
+            ->method('clearBlockHtmlCache');
 
         $this->replaceByMock('model', 'oggetto_adminconfigsearch/config_cache_provider', $modelProviderMock);
 
