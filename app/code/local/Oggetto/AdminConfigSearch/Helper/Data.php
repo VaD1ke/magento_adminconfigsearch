@@ -79,6 +79,16 @@ class Oggetto_AdminConfigSearch_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Get Magento Edition
+     *
+     * @return string
+     */
+    public function getMagentoEdition()
+    {
+        return $this->_getMagentoEdition();
+    }
+
+    /**
      * Get config field value
      *
      * @param string      $path  Path to field
@@ -113,5 +123,15 @@ class Oggetto_AdminConfigSearch_Helper_Data extends Mage_Core_Helper_Abstract
     protected function _addSlashes($str)
     {
         return addslashes($str);
+    }
+
+    /**
+     * Get Magento Edition
+     *
+     * @return string
+     */
+    protected function _getMagentoEdition()
+    {
+        return Mage::getEdition();
     }
 }

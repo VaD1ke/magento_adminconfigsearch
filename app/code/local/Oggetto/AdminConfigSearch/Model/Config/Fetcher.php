@@ -61,6 +61,7 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
                         if ($fieldLabel !== '') {
                             $urlParams['group'] = $section->getName() . '_' . $group->getName();
                             $urlParams['field'] = $field->getName();
+                            $urlParams['key']   = null;
 
                             $sourceModel     = strval($field->source_model);
                             $breadcrumbs     = $helper->__(strval($section->label)) . "->" . $helper->__($groupLabel);

@@ -67,6 +67,18 @@ please refer to http://www.magentocommerce.com for more information.
             </action>
             <action method="addItem">
                 <type>skin_js</type>
+                <name>js/oggetto_adminconfigsearch/CryptoJS/core-min.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/oggetto_adminconfigsearch/CryptoJS/md5-min.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/oggetto_adminconfigsearch/CryptoJS/sha256-min.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
                 <name>js/oggetto_adminconfigsearch/form-events.js</name>
             </action>
             <action method="addItem">

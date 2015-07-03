@@ -205,6 +205,26 @@ class Oggetto_AdminConfigSearch_Test_Helper_Data extends EcomDev_PHPUnit_Test_Ca
     }
 
     /**
+     * Return Magento Edition
+     *
+     * @return void
+     */
+    public function testReturnsMagentoEdition()
+    {
+        $edition = 'test';
+
+        $helperMock = $this->getHelperMock('oggetto_adminconfigsearch', ['_getMagentoEdition']);
+
+        $helperMock->expects($this->once())
+            ->method('_getMagentoEdition')
+            ->willReturn($edition);
+
+        $this->replaceByMock('helper', 'oggetto_adminconfigsearch', $helperMock);
+
+        $this->assertEquals($edition, $helperMock->getMagentoEdition());
+    }
+
+    /**
      * Return store config field value with established path
      *
      * @return void

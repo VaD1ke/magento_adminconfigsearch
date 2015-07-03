@@ -1,11 +1,15 @@
 <?php /** @var Oggetto_AdminConfigSearch_Block_Adminhtml_Search $this */ ?>
 <script>
     ConfigSingleton.setConfigArray(<?php echo "'" . $this->getConfigArray() . "'"; ?>);
+//    function getAdminUrl(params) {
+//        return <?php //echo Mage::helper('adminhtml')->getUrl('adminhtml/system_config/edit',?>// params <?php //);?>//;
+//    }
 </script>
 
 <form id="config-fields-search" class="config-search-form" action="#" method="GET"
       data-url-switch="<?php echo $this->getUrlForFieldValueSwitch(); ?>"
-      data-form-key="<?php echo $this->getFormKey() ?>">
+      data-form-key="<?php echo $this->getFormKey() ?>"
+      data-magento-edition="<?php echo $this->helper('oggetto_adminconfigsearch')->getMagentoEdition(); ?>">
     <input type="text" id="search-settings" class="autocomplete-input" autocomplete="off"
            placeholder="<?php echo $this->helper('oggetto_adminconfigsearch')->__('config search'); ?>"><br>
 </form>

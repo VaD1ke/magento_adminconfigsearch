@@ -57,7 +57,22 @@ jQuery(function($) {
             );
         },
         select: function (event, ui) {
-            location.href = ui.item.url;
+            var url = ui.item.url;
+            url = url.replace(/\/$/g, '') + '/key/';
+
+            var searchForm = $('#config-fields-search');
+
+            var formKey = searchForm.attr('data-form-key');
+            var mageEdition = searchForm.attr('data-magento-edition');
+
+            var secretKey = 'system_config' + 'edit' + formKey;
+
+            if (mageEdition == 'Enterprise') {
+                url += CryptoJS.SHA256(secretKey);
+            } else if (mageEdition == 'Community') {
+                url += CryptoJS.MD5(secretKey);
+            }
+            location.href = url;
         },
         minLength: 3
     }).data('ui-autocomplete')._renderItem = function (ul, item) {
