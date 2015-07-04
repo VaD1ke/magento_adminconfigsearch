@@ -23,7 +23,7 @@
 
 "use strict";
 function searchFuzzy (source, request) {
-    var accuracy = 1;
+    var accuracy = 0;
 
     var labelArr   = source.split(' ');
     var requestArr = request.split(' ');
@@ -49,7 +49,13 @@ function searchFuzzy (source, request) {
         }
     }
 
-    accuracy /= requestArr.length;
+    if (requestArr.length > 0) {
+        accuracy /= requestArr.length;
+    }
 
-    return accuracy >= 0.7;
+    return accuracy;
+}
+
+function sortByAccuracy(a, b) {
+    return a.hitAccuracy <= b.hitAccuracy;
 }

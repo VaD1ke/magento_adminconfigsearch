@@ -77,6 +77,11 @@
     background-size: cover;
 }
 
+.preloader-reverse {
+    background-image: url('../../images/oggetto_adminconfigsearch/preloaders/toggle-reverse.gif');
+    /*background-size: cover;*/
+}
+
 .with-value  {
     float: left;
     margin: 0 0 10px 5px;

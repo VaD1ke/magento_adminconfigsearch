@@ -39,8 +39,8 @@ jQuery(function($) {
         var y = $(window).scrollTop();
         $(window).scrollTop(y+250);
 
-        fieldValueDiv.effect("highlight", {color: '#c8f7c5'}, 3000);
-        fieldNameDiv.effect("highlight", {color: '#c8f7c5'}, 3000);
+        fieldValueDiv.delay(200).effect("highlight", {color: '#c8f7c5'}, 3000);
+        fieldNameDiv.delay(300).effect("highlight", {color: '#c8f7c5'}, 3000);
     }
 });
 

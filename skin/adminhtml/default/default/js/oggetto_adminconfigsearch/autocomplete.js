@@ -46,15 +46,23 @@ jQuery(function($) {
             var requestStr = request.term.trim();
             var matcher = new RegExp( $.ui.autocomplete.escapeRegex( requestStr ), 'i' );
 
-            response($.grep(configData, function(item) {
-                    if (matcher.test(item.label) ||  matcher.test(item.translations)
-                        || matcher.test(item.comment) || matcher.test(item.commentTranslation)){
-                        return true;
-                    }
+            var responseArray = $.grep(configData, function(item) {
+                if (matcher.test(item.label) ||  matcher.test(item.translations)){
+                    item.hitAccuracy = 2;
+                    return true;
+                } else if (matcher.test(item.comment) || matcher.test(item.commentTranslation)) {
+                    item.hitAccuracy = 1;
+                    return true;
+                }
 
-                    return searchFuzzy(item.label.trim(), requestStr);
-                })
-            );
+                var hitAccuracy = searchFuzzy(item.label.trim(), requestStr);
+                if (hitAccuracy >= 0.7) {
+                    item.hitAccuracy = 1 + hitAccuracy;
+                    return true;
+                }
+            });
+            responseArray.sort(sortByAccuracy);
+            response(responseArray);
         },
         select: function (event, ui) {
             var url = ui.item.url;

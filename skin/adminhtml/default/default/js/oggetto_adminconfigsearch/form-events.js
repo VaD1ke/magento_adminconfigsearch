@@ -26,12 +26,20 @@ jQuery(function($) {
         var ul = $('#config-fields-search').find('ul');
 
         var li = ul.children().first();
+
         if (li.length) {
             var input = $('#search-settings');
-            input.data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item:{value:input.val()}});
-        } else {
-            event.preventDefault();
+            var downKeyEvent = $.Event("keydown");
+            downKeyEvent.keyCode = $.ui.keyCode.DOWN;
+
+            var enterKeyEvent = $.Event("keydown");
+            enterKeyEvent.keyCode = $.ui.keyCode.ENTER;
+
+            input.trigger(downKeyEvent);
+            input.trigger(enterKeyEvent);
         }
+
+        event.preventDefault();
     }).on('focus', '#search-settings', function () {
         var ul = $(this).closest('#config-fields-search').find('ul');
         if (!ul.is(':visible')) {

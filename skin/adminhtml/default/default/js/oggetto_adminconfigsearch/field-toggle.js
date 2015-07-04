@@ -34,9 +34,15 @@ jQuery(function($) {
             url: form.data('url-switch'),
             dataType: 'json',
             method: 'post',
-            data: {path: fieldPath, form_key: form.data('form-key'), value: isChecked},
+            data: { path: fieldPath, form_key: form.data('form-key'), value: isChecked },
             beforeSend: function() {
-                onoffswitch.parent().append($('<div>').addClass('preloader'));
+                var preloader = $('<div>').addClass('preloader');
+
+                if (isChecked) {
+                    preloader.addClass('preloader-reverse');
+                }
+
+                onoffswitch.parent().append(preloader);
             },
             success: function(data) {
                 onoffswitch.next('.preloader').remove();
