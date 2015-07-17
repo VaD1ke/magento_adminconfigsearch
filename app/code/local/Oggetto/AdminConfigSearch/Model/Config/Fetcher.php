@@ -69,9 +69,15 @@ class Oggetto_AdminConfigSearch_Model_Config_Fetcher
                             $value           = htmlentities($this->getConfigFieldValue($path));
                             $comment         = strval($field->comment);
 
-                            $valueFromSource = $helper->__(
-                                $this->_getConfigValueFromSourceModel($sourceModel, $value)
-                            );
+                            if ($path == 'shipping/origin/region_id') {
+                                $regionName = $helper->getRegionNameById($value);
+                                $valueFromSource = $regionName ? $regionName
+                                                    : Mage::helper('oggetto_adminconfigsearch')->__('Not set');
+                            } else {
+                                $valueFromSource = $helper->__(
+                                    $this->_getConfigValueFromSourceModel($sourceModel, $value)
+                                );
+                            }
 
                             $configArray[] = [
                                 'label' => $fieldLabel,

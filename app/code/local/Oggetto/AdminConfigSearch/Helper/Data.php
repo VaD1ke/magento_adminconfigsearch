@@ -79,6 +79,23 @@ class Oggetto_AdminConfigSearch_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Get region name by id
+     *
+     * @param integer $regionId Region ID
+     *
+     * @return string|null
+     */
+    public function getRegionNameById($regionId)
+    {
+        /** @var Mage_Directory_Model_Region $regionModel */
+        $regionModel = Mage::getModel('directory/region');
+
+        $regionModel->load($regionId);
+
+        return $regionModel->getName();
+    }
+
+    /**
      * Get Magento Edition
      *
      * @return string
