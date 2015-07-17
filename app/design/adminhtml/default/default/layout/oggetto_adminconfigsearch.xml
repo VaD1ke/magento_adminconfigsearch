@@ -47,11 +47,11 @@ please refer to http://www.magentocommerce.com for more information.
             </action>
             <action method="addItem">
                 <type>skin_js</type>
-                <name>js/oggetto_adminconfigsearch/config-singleton.js</name>
+                <name>js/oggetto_adminconfigsearch/jquery/jquery-ui.js</name>
             </action>
             <action method="addItem">
                 <type>skin_js</type>
-                <name>js/oggetto_adminconfigsearch/jquery/jquery-ui.js</name>
+                <name>js/oggetto_adminconfigsearch/config-singleton.js</name>
             </action>
             <action method="addItem">
                 <type>skin_js</type>
